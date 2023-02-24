@@ -4,6 +4,9 @@ This module defines the following routines used by the 'transform' step of the r
 - ``transformer_fn``: Defines customizable logic for transforming input data before it is passed
   to the estimator during model inference.
 """
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 def transformer_fn():
     """
@@ -11,8 +14,21 @@ def transformer_fn():
     The transformer's input and output signatures should be compatible with scikit-learn
     transformers.
     """
-    #
-    # FIXME::OPTIONAL: return a scikit-learn-compatible transformer object.
-    #
-    # Identity feature transformation is applied when None is returned.
-    return None
+    import sklearn
+
+    return Pipeline(
+        steps=[
+            (
+                "encoder",
+                ColumnTransformer(
+                    transformers=[
+                        (
+                            "std_scaler",
+                            StandardScaler(),
+                            ["f1", "f2"],
+                        ),
+                    ]
+                ),
+            ),
+        ]
+    )

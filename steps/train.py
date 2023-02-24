@@ -7,14 +7,13 @@ This module defines the following routines used by the 'train' step of the regre
 from typing import Dict, Any
 
 
-def estimator_fn(estimator_params: Dict[str, Any] = {}):
-    """
-    Returns an *unfitted* estimator that defines ``fit()`` and ``predict()`` methods.
-    The estimator's input and output signatures should be compatible with scikit-learn
-    estimators.
-    """
-    #
-    # FIXME::OPTIONAL: return a scikit-learn-compatible regression estimator with fine-tuned
-    #                  hyperparameters.
+from typing import Dict, Any
 
-    raise NotImplementedError
+def estimator_fn(estimator_params: Dict[str, Any] = None):
+    from sklearn.ensemble import RandomForestRegressor
+
+    return RandomForestRegressor(random_state=42, **estimator_params)
+
+def my_early_stop_fn(*args):
+  from hyperopt.early_stop import no_progress_loss
+  return no_progress_loss(10)(*args)
