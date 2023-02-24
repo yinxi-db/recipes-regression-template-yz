@@ -18,8 +18,8 @@ INGEST_CONFIG:
   # FIXME::REQUIRED: Specify the format of the training and evaluation dataset. Natively supported
   #                  formats are: parquet, spark_sql, delta.
   using: "delta"
-  location: "dbfs:/tmp/yz/recipe_ingest_data"
-  #location: "yz.recipe_ingest_data"
+  #location: "dbfs:/tmp/yz/recipe_ingest_data"
+  location: "yz.recipe_ingest_data"
   # FIXME::OPTIONAL: Specify the training and evaluation data location. This is usually a DBFS
   # location ("dbfs:/...") or a SQL table ("SCHEMA.TABLE").
   #using: spark_sql
